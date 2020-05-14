@@ -13,24 +13,15 @@ var version = '1.0.1';
 
 bot.on("guildMemberAdd", function(message){
 
-    let guild = message.guild;
     let member = message;
-    let memberCount = client.user.size;
 
-    let userAvatar = member.user.displayAvatarURL();
     let embedJoin = new Discord.MessageEmbed()
         .setColor('#09ff00')
         .setTitle(`Cloud Bot`)
         .setDescription(`Witaj ${member.user}! Na discordzie Cloud Bot`)
-        .setThumbnail(userAvatar);
     
     member.guild.channel.find(`name`, `welcome`).send({ embed: embedJoin });
     
-})
-
-bot.on("guildMemberAdd", member => {
-    var memberRole = member.guild.roles.find(`name`, `Member`);
-    member.addRole(memberRole);
 })
 
 bot.on('message', message =>{
