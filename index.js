@@ -11,18 +11,9 @@ bot.on('ready', () => {
 
 var version = '1.0.1';
 
-bot.on("guildMemberAdd", function(message){
-
-    let member = message;
-
-    let embedJoin = new Discord.MessageEmbed()
-        .setColor('#09ff00')
-        .setTitle(`Cloud Bot`)
-        .setDescription(`Witaj ${member.user}! Na discordzie Cloud Bot`)
-    
-    member.guild.channel.find(`name`, `welcome`).send({ embed: embedJoin });
-    
-})
+bot.on('guildMemberAdd', member => {
+    member.guild.channels.get('710215058528927814').send(`Witaj ${member.user.username}! Na discordzie Cloud Bot.`); 
+});
 
 bot.on('message', message =>{
     
