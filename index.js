@@ -17,11 +17,12 @@ bot.on("guildMemberAdd", function(message){
     let member = message;
     let memberCount = client.user.size;
 
+    let userAvatar = member.user.displayAvatarURL();
     let embedJoin = new Discord.MessageEmbed()
         .setColor('#09ff00')
         .setTitle(`Cloud Bot`)
         .setDescription(`Witaj ${member.user}! Na discordzie Cloud Bot`)
-        .setThumbnail(member.user.avatarURL);
+        .setThumbnail(userAvatar);
     
     member.guild.channel.find(`name`, `welcome`).send({ embed: embedJoin });
     
