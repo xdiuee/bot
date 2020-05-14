@@ -9,10 +9,21 @@ bot.on('ready', () => {
     console.log('This bot is online!')
 })
 
-var version = '1.0.1';
+var version = '1.1.0';
 
 bot.on('guildMemberAdd', member => {
-    member.guild.channels.get('710215058528927814').send(`Witaj ${member.user.username}! Na discordzie Cloud Bot.`); 
+    
+    let embedJoin = new Discord.MessageEmbed()
+
+        .setColor('#09ff00')
+        .setTitle('Cloud Bot')
+        .setDescription(`Siemka ${member.user.username}! Właśnie dołączyłeś do serwera **Cloud Bot**!`)
+        .addField(`_Wchodząc na serwer akceptuje regulamin!_`)
+
+    member.send(embedJoin);
+
+
+
 });
 
 bot.on('message', message =>{
