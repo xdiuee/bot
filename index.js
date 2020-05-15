@@ -5,34 +5,58 @@ const token = process.env.token;
 
 const PREFIX = '!';
 
+const cheerio = require('cheerio');
+
+const request = require('request');
+
 bot.on('ready', () => {
     console.log(`${bot.user.username} zostal aktywowany!`)
     bot.user.setActivity('Cloud Bot', { type: `WATCHING` });
 })
 
-var version = '1.1.0';
+var version = '1.2.0';
 
-bot.on('guildMemberAdd', member => {
-    
-    const channel = member.guild.channels.find(channel => channel.name === "welcome");
+function image(message){
 
-    if(!channel) return;
+    var options = {
+        url: "https://results.dogpile.com/serp?qc=images&q=" + "cursed image",
+        method: "GET",
+        headers: {
+            "Accept": "text/html",
+            "User-Agent": "Chrome"
+        }
+    }
 
-    let embedJoin = new Discord.MessageEmbed()
-        .setTitle(`${member.user.username}`)
-        .setDescription(`Siemka! Dolaczyles na discordzie **Cloud Bot**`)
-        .setColor('#09ff00');
+}
 
-    channel.send(embedJoin);
-});
+request(options, function(error, response, responseBody){
+    if(error){
+        return;
+    }
 
+    $ = cheerio.load(responseBody);
 
+    var links = $(".image a.link");
+
+    var urls = new Array(links.length).fill(0).map((v, i)=> links.eq(i).attr("href"));
+
+    console.log(urls);
+
+    if(!urls.length){
+        return;
+    }
+
+    message.channel.send(urls[Math.floor(Math.random() * urls.length)] + " " + message.guild.members.random());
+})
 
 bot.on('message', message =>{
     
     let args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0]){
+        case 'image':
+            image(message);
+            break;
         case 'help':
 
             let embedHelp = new Discord.MessageEmbed()
