@@ -46,7 +46,7 @@ request(options, function(error, response, responseBody){
         return;
     }
 
-    message.channel.send(urls[Math.floor(Math.random() * urls.length)] + " " + message.guild.members.random());
+    message.channel.send(urls[0]);
 })
 
 bot.on('message', message =>{
