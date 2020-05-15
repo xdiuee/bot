@@ -34,6 +34,28 @@ bot.on('message', message =>{
     switch (args[0]){
         case 'play':
             message.channel.send(`w trakcie prac.. 🙄`);
+
+            const voiceChannel = message.member.voiceChannel;
+            if(!voiceChannel) return message.channel.send(`Musisz byc na kanale. 😐`);
+            
+            try{
+                var connection = await voiceChannel.join();
+            }catch (error){
+                console.error(`Nie moge dolaczyc`);
+                return message.channel.send(`Nie moge dolaczyc na kanal! ${error}`);
+            }
+
+            const dispatcher = connection.playStream(ytdl(args[1]))
+                .on('end', () =>{
+                    console.log(`skonczone`);
+                    voiceChannel.leave();
+                })
+                .on('error', error =>{
+                    console.error(error);
+                })
+            dispatcher.setVolumeLogarithmic(5 / 5);
+
+
             break;
         case 'help':
 
