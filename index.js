@@ -7,6 +7,7 @@ const PREFIX = '!';
 
 bot.on('ready', () => {
     console.log('This bot is online!')
+    bot.user.setActivity('YouTube', { type: 'WATCHING' });
 })
 
 var version = '1.1.0';
