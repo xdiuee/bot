@@ -12,7 +12,6 @@ bot.on('ready', () => {
 
 var version = '1.2.0';
 
-}
 
 bot.on('message', message =>{
     
