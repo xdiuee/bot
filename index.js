@@ -32,14 +32,8 @@ bot.on('message', message =>{
     let args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0]){
-        case 'kick':
-            async(bot,message,args)=>{
-                if(!args[0]) return message.channel.send(`Kogo wyrzucić? 🙄`);
-                
-                let User = message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(user=>user.username === args[0]);
-
-                if(!User) return message.channel.send(`Nie odnalazłem tego użytkownika`);
-            }
+        case 'play':
+            message.channel.send(`w trakcie prac.. 🙄`);
             break;
         case 'help':
 
@@ -48,7 +42,7 @@ bot.on('message', message =>{
                 .setColor('#09ff00')
                 .setTitle('Cloud Bot Help')
                 .addField('Sprawdź wersje bota.', '!version')
-                .addField('Wyrzuć użytkownika', '!kick');
+                .addField('Włącz muzyke', '!play');
 
             message.channel.send(embedHelp);
 
