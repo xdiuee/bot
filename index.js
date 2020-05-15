@@ -14,15 +14,16 @@ var version = '1.1.0';
 
 bot.on('guildMemberAdd', member => {
     
+    const channel = member.guild.channels.find(channel => channel.name === "welcome");
+
+    if(!channel) return;
+
     let embedJoin = new Discord.MessageEmbed()
+        .setTitle(`${member.user.username}`)
+        .setDescription(`Siemka! Dolaczyles na discordzie **Cloud Bot**`)
+        .setColor('#09ff00');
 
-        .setColor('#09ff00')
-        .setTitle('Cloud Bot')
-        .setDescription(`Siemka ${member.user.username}! Właśnie dołączyłeś do serwera **Cloud Bot**!`)
-        .addField('', '_Wchodząc na serwer akceptuje regulamin!_')
-
-    member.send(embedJoin);
-    member.roles.add('710199567966273577');
+    channel.send(embedJoin);
 });
 
 
@@ -32,31 +33,6 @@ bot.on('message', message =>{
     let args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0]){
-        case 'play':
-            message.channel.send(`w trakcie prac.. 🙄`);
-
-            const voiceChannel = message.member.voiceChannel;
-            if(!voiceChannel) return message.channel.send(`Musisz byc na kanale. 😐`);
-            
-            try{
-                var connection = await voiceChannel.join();
-            }catch (error){
-                console.error(`Nie moge dolaczyc`);
-                return message.channel.send(`Nie moge dolaczyc na kanal! ${error}`);
-            }
-
-            const dispatcher = connection.playStream(ytdl(args[1]))
-                .on('end', () =>{
-                    console.log(`skonczone`);
-                    voiceChannel.leave();
-                })
-                .on('error', error =>{
-                    console.error(error);
-                })
-            dispatcher.setVolumeLogarithmic(5 / 5);
-
-
-            break;
         case 'help':
 
             let embedHelp = new Discord.MessageEmbed()
