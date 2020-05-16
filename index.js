@@ -66,6 +66,11 @@ bot.on('message', message =>{
 
 })
 
+bot.on('guildMemberAdd', member =>{
+    const nv = member.roles.cache.find('711162405501009920');
+    member.roles.add(nv);
+})
+
 
 bot.on('message', async message =>{
     if(message.author.bot) return;
