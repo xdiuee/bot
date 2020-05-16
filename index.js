@@ -12,12 +12,25 @@ bot.on('ready', () => {
 
 var version = '1.2.0';
 
-
 bot.on('message', message =>{
     
     let args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0]){
+        case 'vermsg':
+            message.delete();
+
+            let embedVer = new Discord.MessageEmbed()
+
+                .setColor('#09ff00')
+                .setTitle('Weryfikacja')
+                .setDescription('Napisz na kanale #weryfikacja komende !verify, aby się zweryfikować');
+
+            message.channel.send(embedVer);
+
+            break;
+
+
         case 'image':
             image(message);
             break;
@@ -54,7 +67,19 @@ bot.on('message', message =>{
 })
 
 
-
+bot.on('message', async message =>{
+    if(message.author.bot) return;
+    if(message.content.toLowerCase() === '!verify' && message.channel.id === '711159459518349422'){
+        const role = message.guild.roles.cache.get('711160695223222383');
+        if(role){
+            try{
+                await message.member.roles.add(role);
+            }catch(err){
+                console.log(err);
+            }
+        }
+    }
+})
 
 
 
