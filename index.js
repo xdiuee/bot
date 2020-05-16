@@ -70,7 +70,7 @@ bot.on('guildMemberAdd', member =>{
 
     console.log(`${member.user.username} dolaczyl na serwer!`);
 
-    var role = member.guild.roles.find('name', 'niezweryfikowany');
+    var role = member.guild.roles.find('id', '711162405501009920');
 
     member.roles.add(role);
 })
