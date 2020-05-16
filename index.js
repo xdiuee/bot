@@ -67,8 +67,12 @@ bot.on('message', message =>{
 })
 
 bot.on('guildMemberAdd', member =>{
-    const nv = member.roles.cache.find('711162405501009920');
-    member.roles.add(nv);
+
+    console.log(`${member.user.username} dolaczyl na serwer!`);
+
+    var role = member.guild.roles.find('name', 'niezweryfikowany');
+
+    member.roles.add(role);
 })
 
 
