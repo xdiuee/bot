@@ -66,11 +66,16 @@ bot.on('message', message =>{
 
 })
 
-bot.on('guildMemberAdd', (member) =>{
+bot.on('guildMemberAdd', async member =>{
 
-    member.send("Dziękujemy za zaufanie i dołączenie na nasz serwer discord!");
-    var joinRole = member.guild.roles.cache.find("id", "711162405501009920");
-    member.roles.add(joinRole);
+    const joinRole = member.guild.roles.cache.find('711162405501009920');
+    if(joinRole){
+        try{
+            await member.roles.add(joinRole);
+        }catch(err){
+            console.log(err)
+        }
+    }
 })
 
 
