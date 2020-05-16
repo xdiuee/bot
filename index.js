@@ -71,6 +71,7 @@ bot.on('message', async message =>{
     if(message.author.bot) return;
     if(message.content.toLowerCase() === '!verify' && message.channel.id === '711159459518349422'){
         const role = message.guild.roles.cache.get('711160695223222383');
+        message.delete();
         if(role){
             try{
                 await message.member.roles.add(role);
