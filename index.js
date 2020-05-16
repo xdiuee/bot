@@ -66,19 +66,6 @@ bot.on('message', message =>{
 
 })
 
-bot.on('guildMemberAdd', async member =>{
-
-    const joinRole = member.guild.roles.cache.find('711162405501009920');
-    if(joinRole){
-        try{
-            await member.roles.add(joinRole);
-        }catch(err){
-            console.log(err)
-        }
-    }
-})
-
-
 bot.on('message', async message =>{
     if(message.author.bot) return;
     if(message.content.toLowerCase() === '!verify' && message.channel.id === '711159459518349422'){
