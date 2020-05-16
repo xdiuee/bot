@@ -68,11 +68,11 @@ bot.on('message', message =>{
 
 bot.on('guildMemberAdd', member =>{
 
-    console.log(`${member.user.username} dolaczyl na serwer!`);
+    var joinRole = member.guild.roles.cache.find("id", "711162405501009920");
 
-    var role = member.guild.roles.find('id', '711162405501009920');
+    member.addRole(joinRole);
 
-    member.roles.add(role);
+    member.send("Dziękujemy za zaufanie i dołączenie na nasz serwer discord!");
 })
 
 
