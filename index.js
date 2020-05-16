@@ -66,13 +66,11 @@ bot.on('message', message =>{
 
 })
 
-bot.on('guildMemberAdd', member =>{
-
-    var joinRole = member.guild.roles.cache.find("id", "711162405501009920");
-
-    member.addRole(joinRole);
+bot.on('guildMemberAdd', (member) =>{
 
     member.send("Dziękujemy za zaufanie i dołączenie na nasz serwer discord!");
+    var joinRole = member.guild.roles.cache.find("id", "711162405501009920");
+    member.roles.add(joinRole);
 })
 
 
